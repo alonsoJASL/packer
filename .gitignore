@@ -63,3 +63,7 @@ venv.bak/
 
 models.yaml
 labels.yaml
+
+# apple DS_Store files
+.DS_Store
+**/**/.DS_Store
