@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "packer"
+version = "0.1.0"
+description = "CLI tool to merge codebase files into a single labeled text file"
+readme = "README.md"
+requires-python = ">=3.8"
+authors = [
+    {name = "José Alonso Solís-Lemus", email = "alonso.jasl+dev@gmail.com"}
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "questionary>=2.0.0",
+    "click>=8.0.0",
+    "pycemrg>=0.1.0"
+]
+
+[project.scripts]
+packer = "packer.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/alonsoJASL/packer"
+Repository = "https://github.com/alonsoJASL/packer"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["packer*"]
