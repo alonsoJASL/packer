@@ -36,14 +36,21 @@ from packer.merger import merge_files
     is_flag=True,
     help="Skip interactive prompts, process all files",
 )
-def main(output: str, root: str, no_interactive: bool) -> None:
+@click.option(
+    "--extension",
+    "-ext",
+    multiple=True,
+    help="File extension to include (repeatable, e.g. -ext py -ext md). Only used with --no-interactive.",
+)
+def main(output: str, root: str, no_interactive: bool, extension: tuple) -> None:
     """
     Crawl directory, filter files interactively, and merge into a single labeled text file.
-    
+
     Examples:
         packer
         packer --output context.txt --root /path/to/project
         packer --no-interactive
+        packer --no-interactive -ext py -ext md
     """
     root_path = Path(root).resolve()
     output_path = Path(output)
@@ -61,7 +68,11 @@ def main(output: str, root: str, no_interactive: bool) -> None:
     
     # Interactive filtering
     if no_interactive:
-        selected_files = all_files
+        if extension:
+            exts = {e if e.startswith(".") else f".{e}" for e in extension}
+            selected_files = filter_by_extensions(all_files, exts)
+        else:
+            selected_files = all_files
     else:
         selected_files = _interactive_filter(all_files)
     

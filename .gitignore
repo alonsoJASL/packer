@@ -67,3 +67,7 @@ labels.yaml
 # apple DS_Store files
 .DS_Store
 **/**/.DS_Store
+
+CLAUDE.md
+.claude/
+.claude/**
